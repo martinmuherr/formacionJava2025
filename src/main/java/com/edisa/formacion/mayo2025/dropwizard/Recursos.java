@@ -5,6 +5,7 @@ import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.common.HybridBinarizer;
+import com.google.zxing.multi.GenericMultipleBarcodeReader;
 import com.google.zxing.multi.qrcode.QRCodeMultiReader;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 
@@ -76,7 +77,8 @@ public class Recursos {
             LuminanceSource source = new BufferedImageLuminanceSource(bufImage);
             BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
 
-            QRCodeMultiReader multiReader = new QRCodeMultiReader();
+            MultiFormatReader multi = new MultiFormatReader();
+            GenericMultipleBarcodeReader multiReader = new GenericMultipleBarcodeReader(multi);
             Result[] decodeResult = multiReader.decodeMultiple(bitmap);
 
             for (Result result : decodeResult) {
